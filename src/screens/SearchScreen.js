@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import SearchBar from "../components/SearchBar";
 import yelp from "../api/yelp";
 import { Snackbar } from "react-native-paper";
@@ -40,10 +40,17 @@ const SearchScreen = () => {
   return (
     <View style={styles.viewStyle}>
       <SearchBar term={term} onTermChange={setTerm} onTermSubmit={searchApi} />
-      <Text> We have found {results.length} results</Text>
-      <ResultsList title="Cost Effective" results={filterResultsByPrice("$")} />
-      <ResultsList title="Bit Pricier" results={filterResultsByPrice("$$")} />
-      <ResultsList title="Big Spencer" results={filterResultsByPrice("$$$")} />
+      <ScrollView>
+        <ResultsList
+          title="Cost Effective"
+          results={filterResultsByPrice("$")}
+        />
+        <ResultsList title="Bit Pricier" results={filterResultsByPrice("$$")} />
+        <ResultsList
+          title="Big Spencer"
+          results={filterResultsByPrice("$$$")}
+        />
+      </ScrollView>
       <Snackbar
         style={styles.snackbarStyle}
         visible={visible}
